@@ -1,0 +1,323 @@
+1. Disable Enforce Changes button on Create Admin area -> When no changes are done
+2. Remove GroupID placeholder when deleting a User
+3. Inform User when he, doesnt save the changes and clicked on Go back button
+4. Remove Question mark from create Group Button
+5. Select atleast one query features
+
+
+
+ction taken - It was not allowed at anytime
+
+2. 
+Action taken -
+ 
+3.
+Action taken -
+ 
+4. 
+         Is the intent to show the groupaccountmanager here? In that case it should not show "superadmin1@billdesk.com"
+ 
+5. 
+ 
+6. 
+
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+11_1     -  type 'Vodafone post -  And’
+                                                            we get two entries for andhra Pradesh - add them
+                                                           type 'Vodafone post - Bih'
+                                                            we get two entries for bihar - add them
+                                                           clear the text in the search window
+                                                            you will notice two more entries for 'ASSAM' also added!
+                                                             OR
+                                                           type 'Vodafone post - Delh'
+                                                            add two entries for Delhi (note while adding, button does not seem to work on all the clicks but you see the merchant numbers decrementing - i think that is the clue)
+                                                            you see many entries other than Delhi also.
+                                                         ALMOST SIMILAR THING HAPPENS with FEATURE ADDITION
+                                               PS:I think this is the work in progress, but logging so we could track the issue.
+ - > We are already tracking this defect
+ 
+11_2 modify group by same user (before being verified) fails at the last step  (after modifying the features/merchants and clicking ‘modify’)- could stop in the beginning itself.
+- > We are already tracking this defect
+
+11_3  verify group interface not consistent: the featulist tab does not have ‘sl.no’ but the merchants list has.
+                                              Also in the Configs tab we see the following listing.
+      
+                                                                                                                                ref3                                        ref3
+                                                                                                                                ref4                                        ref4
+                                                                                                                                ref5                                        ref5
+                                                                                                                                ref6                                        ref6
+                                                                                                                                ref7                                        ref7
+                                                                                                                                ref8                                        ref8
+                                                                                                                                textData                              {"queryFeature":"one"}
+ -> We will track it on jira and we will make it consistent
+ 
+11_4 modify group should allow only change of AccountManager
+                                                          go to modify group, do not change features or the merchants, but only modify account manager. Errors out " Cannot do that. You have to change atleast one merchant and feature". We should allow  change of groupAccountManager.
+
+->We will track it on Jira
+ 
+11_5 modify group deleted the entries!!! - Modified Bigmerchant tne Voda_postpaid as superadmn1. They are not seen any more!. please check in the backend.
+ 
+-> I am really sorry, not able to understand the defect thoroughly. Kindly elaborate please. 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+TRAFFIC
+------------
+ 
+Refreshed time:
+a)In traffic page, device page :Last Refreshed May 30 23:34 (always)
+b)not shown in payment Type page
+ 
+UI - extra rectangle - small rectangular crossed box appears with amounts- related to licence?
+ 
+The icons for 'Partial outage, Fluctuation, Outage' not showing up. we always get a crossed circle. This is seen only in today's build.
+ 
+In the graph download page the request time has '+5.30'
+ 
+In traffic report (for today) - at 14.20 - the times show till 22.00 hours
+ 
+In traffic report (for today) - at 14.20 The values seen on in the report for avarage transaction - 2303, On the graph 2452. The amount and count are OK.
+ 
+In traffic report (last week) - are we supposed to show only the daily report - we have the daily graph downloaded. DISCUSS.
+ 
+Report request time :'2015-05-15T16:34:06.249+05:30'  can be made more readable - seconds may not have decimal., could have space between date,time
+ 
+‘request id’ is shown in the downloads page - same can be displayed in the success page, "The Request ID is …”
+ 
+The 'total amount' field in the report traffic report is highlighted.
+ 
+design question: The reports for download : will they be available for all the users of the group or only the user who has requested?
+ 
+Payment Type:
+-------------------
+ 
+The percentage values - in horizontal bar chart are looking too feeble
+ 
+'Others' being expandable is not indicative. yes we have made it hyperlink, but still not indicative.  label itself can be 'Others- more?' 
+     - on clicking the button says [Back to] -> this could simply be [Back]. Is it highcharts stuff?
+ 
+click on DebitCards - only alternate columns are used. Further on clicking 'Others' nothing happens.
+--------------------------------------------------------------------------------------------------------------
+
+screen shot for 'Small Rectangles' in collections GUI - on my laptop - see the amount column 
+
+-------------------------------------------------------------------------------------------------------------
+
+
+Add User:
+---------------
+screen – right side top tab not aligned with the contents section
+ 
+setAccesstime - remains always RED in spite of editing all the fields (start time, end time, IP) - fails with the following
+ 
+"           User Not Added
+Sorry, could not cater to your request. "
+-Correct error to be displayed
+ 
+Consistency across success and failure popups – need to have all success and failure messages consistent.
+ 
+Examples:
+"              Success!
+ 
+        User Added Successfully        "
+ 
+"               Failure!
+ 
+  User not added. Please set IP address correctly "
+ 
+"               Success!
+ 
+     Group modified Successfully "
+ 
+"                  Failure!
+ 
+  User not added. Duplicate emailID! "
+                 
+"                  Failure!
+ 
+  Reset Password Unsuccessful. Email service not working"
+             
+user registration
+-----------------------
+ 
+- the page can be bit wider
+- Top text to read "Please enter the following details to activate your account"
+- Name(label) to be replaced with 'First Name' 'Last Name'
+- password strength indicator
+  enter bill333   indicator says 'OK' but on clicking says 'must be 8 characters'.  The strength  indicator should cater to password specs.
+ 
+- the password recommendations to be added here as well
+ 
+- enter a wrong OTP - message
+ 
+"           Failed
+            null           "
+ 
+- click send OTP button - message
+ 
+"          Success
+             null          "
+ 
+The same above message appears on entering the correct OTP and clicking "Activate My Account"
+ 
+Message should be "Thank you. You have successfully verfied your account details .....' (I guess we have finalized on this message earlier, else
+please let me know) and redirect to login page.
+ 
+ 
+On a side note, tried to deploy the war on tomcat; deployment fails with following errors:
+ 
+May 19, 2015 2:55:40 PM org.apache.catalina.core.StandardContext listenerStart
+SEVERE: Exception sending context initialized event to listener instance of class com.billdesk.service.WebContextListener
+java.lang.NullPointerException
+                at com.billdesk.database.ReportWriterDB.retrievePendingReportRequest(ReportWriterDB.java:75)
+                at com.billdesk.query.ReportWriter.<init>(ReportWriter.java:61)
+                at com.billdesk.query.ReportWriter.createInstance(ReportWriter.java:75)
+                at com.billdesk.service.WebContextListener.contextInitialized(WebContextListener.java:32)
+                at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5016)
+                at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5528)
+                at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+                at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:901)
+                at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:877)
+                at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:652)
+                at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:1095)
+                at org.apache.catalina.startup.HostConfig$DeployWar.run(HostConfig.java:1930)
+                at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+                at java.util.concurrent.FutureTask.run(Unknown Source)
+                at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+                at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+                at java.lang.Thread.run(Unknown Source)
+ 
+May 19, 2015 2:55:40 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+May 19, 2015 2:55:41 PM org.apache.catalina.core.ApplicationContext log
+INFO: Closing Spring root WebApplicationContext
+May 19, 2015 2:55:42 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+May 19, 2015 2:55:42 PM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+May 19, 2015 2:55:42 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@120e3a6')
+May 19, 2015 2:55:53 PM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+May 19, 2015 2:55:53 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
+May 19, 2015 3:06:47 PM org.apache.catalina.core.ApplicationContext log
+INFO: Spring WebApplicationInitializers detected on classpath: [com.billdesk.security.SecurityInitializer@1dc9ceb]
+May 19, 2015 3:06:48 PM org.apache.catalina.core.StandardContext listenerStart
+SEVERE: Exception sending context initialized event to listener instance of class com.billdesk.service.WebContextListener
+java.lang.NullPointerException
+                at com.billdesk.database.ReportWriterDB.retrievePendingReportRequest(ReportWriterDB.java:75)
+                at com.billdesk.query.ReportWriter.<init>(ReportWriter.java:61)
+                at com.billdesk.query.ReportWriter.createInstance(ReportWriter.java:75)
+                at com.billdesk.service.WebContextListener.contextInitialized(WebContextListener.java:32)
+                at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5016)
+                at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5528)
+                at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+                at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:901)
+                at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:877)
+                at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:652)
+                at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:1095)
+                at org.apache.catalina.startup.HostConfig$DeployWar.run(HostConfig.java:1930)
+                at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+                at java.util.concurrent.FutureTask.run(Unknown Source)
+                at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+                at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+                at java.lang.Thread.run(Unknown Source)
+ 
+May 19, 2015 3:06:48 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+May 19, 2015 3:06:49 PM org.apache.catalina.core.ApplicationContext log
+INFO: Closing Spring root WebApplicationContext
+May 19, 2015 3:06:49 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+May 19, 2015 3:06:49 PM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+May 19, 2015 3:06:49 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@88f4c3')
+-------------------------------------------------------------------------------------------------------
+
+
+try to login at a date/time not permitted;
+error says "You can not login now" -> "You can not login now as per the Billdesk access policy"
+ 
+ 
+create group
+  just add groupname and ID ->
+                          says
+"       At Lest one feature and merchant!
+ 
+        You have:0features,0 merchants      "   to be refined "Select Atleast One Feature" or "Select Atleast one Merchant" depending on the case.
+ 
+ 
+delete a just created group (before verify)
+         The state changes to  "REJECTED" and button options change from "VIEW/DELETE" to "VIEW/MODIFY/DELETE"
+         repeated actions of delete says " Group Modified Successfully" but actually does not delete the group
+ 
+try to create a group without selecting query feature
+ 
+"        Select a Query Feature
+ 
+"   Select one of query featuress you need to grant"  -> " Select the query feature to be assigned"
+ 
+ 
+entry remains after verify: verify the group newly created, the entry should go away; it remains. (this is not consistent though)
+                            but if I reject the entry goes off: (but in the VIEW menu of superadmin1 it still says "ACTIVE" "VIEW" ?)               
+  
+ 
+view of admin user does not have a 'X' button
+ 
+ 
+modify user flow says "sending reset link" before invoking modify !
+ 
+ 
+password changes
+---------------
+ 
+when passwords are not matching
+ 
+"       No Match!
+ 
+     "   ->
+ 
+"            Failure!
+  New Passwords must match! "
+ 
+ 
+when old password is wrong still goes through and says - "success" . But old password is still valid; no change has occurred.
+ 
+ 
+:profile has start and endtimes but not access days:
+ 
+ 
+clicking "Reset Password" link - "Are you sure?This user's account will be locked and their password will be reset." ->
+                                 "Are you sure? This user's account will be locked and the password reset request will be sent." [q: R we locking
+account while password is getting changed?]
+ 
+tags -> category - still to be done in some pages : example view admin user (note this popup also does not have an 'X' button)
+ 
+ 
+modify Admin user - change of access days does not get reflected correctly.
+                    do modify 'access days'-repeatedly and the changes are not reflected sometimes (almost 50%times)
+ 
+ 
+Modify user and modify Admin user not consistent:
+ 
+   1) modify Admin user screen displays internal IDs UID_11 etc., not required.
+      other fields are: Name, email, status and VIEW button
+ 
+   2)modify user (second screen listing users) diaplays: email, Status and View Button
+                                               Need to add 'Name' in this screen
+ 
+user verification page: does not redirect correctly to the Billdesk site.
+ 
+ 
+just before opening the verification page there is small splash screen - to be removed
+ 
+ 
+modify group - change admin - always logs out with session time out
